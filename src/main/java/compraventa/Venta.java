@@ -2,13 +2,7 @@ package compraventa;
 
 import java.util.Date;
 
-/**
- * Esta es la entidad que represneta a las compras.
- * 
- * @author jorge
- *
- */
-public class Compra {
+public class Venta {
 	private Producto producto;
 	private Date fecha;
 	private Integer cantidad;
@@ -33,6 +27,7 @@ public class Compra {
 		this.cantidad = cantidad;
 	}
 	
-	
+	public String toString() {
+		return "Venta: " + producto.getNombre() + ", " + cantidad + " unidades " + fecha;
+	}
 }
-
