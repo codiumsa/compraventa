@@ -8,5 +8,10 @@ public class Main {
 		Venta venta = VentasBusiness.vender(banana, 5);
 		System.out.println(venta);
 		System.out.println("Existencia actual: " + banana.getExistencia());
+		
+		
+		Compra compra = CompraBusiness.comprar(banana, 20);
+		System.out.println(compra);
+		System.out.println("Existencia actual: " + banana.getExistencia());
 	}
 }

@@ -33,6 +33,8 @@ public class Compra {
 		this.cantidad = cantidad;
 	}
 	
-	
+	public String toString() {
+		return "Compra: " + producto.getNombre() + ", " + cantidad + " unidades " + fecha;
+	}
 }
 
