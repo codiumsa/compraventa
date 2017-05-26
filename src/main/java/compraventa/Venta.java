@@ -30,4 +30,8 @@ public class Venta {
 	public String toString() {
 		return "Venta: " + producto.getNombre() + ", " + cantidad + " unidades " + fecha;
 	}
+	
+	public void metodoInterno() {
+		
+	}
 }
