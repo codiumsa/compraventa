@@ -4,7 +4,7 @@ package compraventa;
  * Esta clase representa a un cajero dentro del sistema.
  * 
  * 
- * @author Jorge Ramirez <jorge@codium.com.py>
+ * @author Jorge Ramirez
  * @since 0.1.0
  */
 public class Cajero extends Persona {
