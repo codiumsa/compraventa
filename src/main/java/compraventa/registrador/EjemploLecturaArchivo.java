@@ -24,6 +24,12 @@ public class EjemploLecturaArchivo {
 
 			while (line != null) {
 				System.out.println(line);
+				System.out.println("sus partes: ");
+				// permite partir la cadena usando un caracter/expresión regular
+				String[] parts = line.split(";");
+				for(String part: parts) {
+					System.out.println("\t" + part);
+				}
 				line = br.readLine();
 			}
 			br.close();
