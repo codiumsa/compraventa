@@ -2,11 +2,13 @@ package compraventa;
 
 import java.util.Date;
 
+import exceptions.CantidadNegativaException;
+
 public class CompraBusiness {
 
-	public static Compra comprar(Producto p, int cantidad) {
+	public static Compra comprar(Producto p, int cantidad) throws CantidadNegativaException {
 		if(cantidad < 0) {
-			return null;
+			throw new CantidadNegativaException();
 		}
 		
 		Compra compra = new Compra();
