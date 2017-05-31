@@ -1,4 +1,4 @@
-package services;
+package compraventa.services;
 
 public class Secretaria {
 	private String nombre;

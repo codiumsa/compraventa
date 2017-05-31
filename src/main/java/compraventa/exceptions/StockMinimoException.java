@@ -1,4 +1,4 @@
-package exceptions;
+package compraventa.exceptions;
 
 public class StockMinimoException extends Exception {
 	

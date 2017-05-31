@@ -2,6 +2,8 @@ package compraventa;
 
 import java.util.Date;
 
+import compraventa.reflection.Positivo;
+
 /**
  * Esta es la entidad que represneta a las compras.
  * 
@@ -11,6 +13,8 @@ import java.util.Date;
 public class Compra {
 	private Producto producto;
 	private Date fecha;
+	
+	@Positivo
 	private Integer cantidad;
 	
 	

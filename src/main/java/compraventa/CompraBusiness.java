@@ -2,7 +2,7 @@ package compraventa;
 
 import java.util.Date;
 
-import exceptions.CantidadNegativaException;
+import compraventa.exceptions.CantidadNegativaException;
 
 public class CompraBusiness {
 

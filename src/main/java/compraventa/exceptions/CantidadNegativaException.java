@@ -1,4 +1,4 @@
-package exceptions;
+package compraventa.exceptions;
 
 public class CantidadNegativaException extends Exception {
 	

@@ -2,7 +2,7 @@ package compraventa;
 
 import java.util.Date;
 
-import exceptions.StockMinimoException;
+import compraventa.exceptions.StockMinimoException;
 
 /**
  * Clase que encapsula la lógica de ventas.

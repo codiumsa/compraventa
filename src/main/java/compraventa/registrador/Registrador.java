@@ -1,7 +1,10 @@
 package compraventa.registrador;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +12,9 @@ import java.util.Map;
 import compraventa.CompraBusiness;
 import compraventa.Producto;
 import compraventa.VentasBusiness;
+import compraventa.exceptions.CantidadNegativaException;
+import compraventa.exceptions.StockMinimoException;
 import compraventa.registrador.OperacionParser.Operacion;
-import exceptions.CantidadNegativaException;
-import exceptions.StockMinimoException;
 
 /**
  * Clase que permite registrar en modo "batch" operaciones de compra/venta.
@@ -53,6 +56,18 @@ public class Registrador {
 	}
 	
 	public static void main(String[] args) {
+		String fechaStr = "2017-03-23";
+		SimpleDateFormat sdf = new SimpleDateFormat("y-M-d");
+		try {
+			System.out.println("Fecha sin parsear: " + fechaStr);
+			Date fecha = sdf.parse(fechaStr);
+			System.out.println("Fecha parseada: " + fecha);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		
 		Registrador registrador = new Registrador();
 		
 		try {

@@ -1,5 +1,7 @@
-package services;
+package compraventa.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,13 @@ public class Observer {
 	
 	
 	public static void main(String[] args) {
+		SimpleDateFormat sdf = new SimpleDateFormat("y-M-d");
+		try {
+			System.out.println(sdf.parse("2017-03-05"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		Observer observer = new Observer();
 		
 		observer.listen(new Listener() {

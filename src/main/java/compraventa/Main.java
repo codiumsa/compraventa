@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import exceptions.CantidadNegativaException;
-import exceptions.StockMinimoException;
-import services.Service;
-import services.Service.ApiResponse;
+import compraventa.exceptions.CantidadNegativaException;
+import compraventa.exceptions.StockMinimoException;
+import compraventa.services.Service;
+import compraventa.services.Service.ApiResponse;
 
 public class Main {
 	
