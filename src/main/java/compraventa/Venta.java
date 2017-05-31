@@ -2,9 +2,13 @@ package compraventa;
 
 import java.util.Date;
 
+import compraventa.reflection.Positivo;
+
 public class Venta {
 	private Producto producto;
 	private Date fecha;
+	
+	@Positivo
 	private Integer cantidad;
 	
 	
