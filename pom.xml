@@ -7,4 +7,9 @@
     <groupId>py.gov.hacienda</groupId>
     <artifactId>compraventa</artifactId>
     <version>0.1.0</version>
+    
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 </project>

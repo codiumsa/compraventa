@@ -1,5 +1,6 @@
 package compraventa;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import compraventa.reflection.Positivo;
@@ -32,10 +33,8 @@ public class Venta {
 	}
 	
 	public String toString() {
-		return "Venta: " + producto.getNombre() + ", " + cantidad + " unidades " + fecha;
-	}
-	
-	public void metodoInterno() {
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/y");
+		long total = producto.getPrecio() * cantidad;
+		return "Venta: " + producto.getNombre() + ", " + cantidad + " unidades. Total: " + total + " Gs. Fecha: " + sdf.format(fecha);
 	}
 }

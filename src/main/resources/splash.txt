@@ -1,0 +1,17 @@
+ ______     __   __  
+/\  ___\   /\ \ / /  
+\ \ \____  \ \ \'/   
+ \ \_____\  \ \__|   
+  \/_____/   \/_/    
+
+
+Opciones
+========
+
+1) Crear Producto
+2) Listar Productos
+3) Comprar Producto
+4) Vender Producto
+5) Reporte de ventas
+6) Exportar ventas a CSV                                                                                                                         
+7) Salir

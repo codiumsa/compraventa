@@ -4,6 +4,7 @@ public class Producto {
 	private String nombre;
 	private Integer existencia = 0;
 	private String codigo;
+	private Long precio;
 	
 	public Producto() {
 	}
@@ -40,6 +41,14 @@ public class Producto {
 	}
 	
 	public String toString() {
-		return nombre + " " + existencia + " unidades en stock";
+		return nombre + " " + existencia + " unidades en stock. Precio: " + precio;
+	}
+
+	public Long getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Long precio) {
+		this.precio = precio;
 	}
 }
