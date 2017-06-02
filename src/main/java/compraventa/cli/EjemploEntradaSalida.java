@@ -12,6 +12,14 @@ import java.io.InputStreamReader;
  * utilizando {@link System.in}; Salida Estándar, disponible utilizando {@link System.out};
  * y Salida de Error Estándar, disponible utilizando {@link System.err}.
  * 
+ * Cómo compilar este ejemplo desde la terminal.
+ * 
+ * javac compraventa/cli/EjemploEntradaSalida.java
+ * 
+ * Ejecutar con
+ * 
+ * java compraventa.cli.EjemploEntradaSalida
+ * 
  * @author jorge
  */
 public class EjemploEntradaSalida {
@@ -26,7 +34,7 @@ public class EjemploEntradaSalida {
 			try {
 				String line = br.readLine();
 				System.out.printf("Hola, %s\n", line);
-				System.out.print("Ingresa tu nombre: ");
+				System.out.print("Ingresa tu nombre: ");				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
