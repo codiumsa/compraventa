@@ -21,7 +21,6 @@
 	</dependencies>
 
 
-
 	<repositories>
 		<repository>
 			<id>maven-atlassian</id>

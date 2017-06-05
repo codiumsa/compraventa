@@ -1,6 +1,7 @@
 package compraventa;
 
 public class Persona implements Nombrable {
+	private Long id;
 	private String nombre;
 
 	public String getNombre() {
@@ -18,5 +19,13 @@ public class Persona implements Nombrable {
 	public boolean equals(Object otro) {
 		Persona p = (Persona) otro;
 		return nombre.equals(p.getNombre());
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
