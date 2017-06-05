@@ -1,6 +1,7 @@
 package compraventa;
 
 public class Producto {
+	private Long id;
 	private String nombre;
 	private Integer existencia = 0;
 	private String codigo;
@@ -41,7 +42,7 @@ public class Producto {
 	}
 	
 	public String toString() {
-		return nombre + " " + existencia + " unidades en stock. Precio: " + precio;
+		return nombre + " (" + codigo + ") " + existencia + " unidades en stock. Precio: " + precio;
 	}
 
 	public Long getPrecio() {
@@ -50,5 +51,13 @@ public class Producto {
 
 	public void setPrecio(Long precio) {
 		this.precio = precio;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
