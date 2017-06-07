@@ -1,5 +1,7 @@
 package compraventa.jpa;
 
+import java.util.List;
+
 import compraventa.Producto;
 
 /**
@@ -21,8 +23,12 @@ public class Main {
 		System.out.println("Se inicia la creación del producto...");
 		dao.persist(p);
 		System.out.println("Producto creado!");
-		System.out.println(p);
 		
+		List<Producto> productos = dao.all();
+		
+		for(Producto producto: productos) {
+			System.out.println(producto);
+		}
 		dao.close();
 	}
 }

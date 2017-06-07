@@ -1,5 +1,7 @@
 package compraventa.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import compraventa.Producto;
@@ -21,6 +23,11 @@ public class ProductosDAO {
 		em.getTransaction().begin();
 		em.persist(p);
 		em.getTransaction().commit();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Producto> all() {
+		return em.createQuery("SELECT p FROM Producto p").getResultList();
 	}
 	
 	public void close() {
