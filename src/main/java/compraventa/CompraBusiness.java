@@ -12,8 +12,6 @@ public class CompraBusiness {
 		}
 		
 		Compra compra = new Compra();
-		compra.setProducto(p);
-		compra.setCantidad(cantidad);
 		compra.setFecha(new Date());
 		p.setExistencia(p.getExistencia() + cantidad);
 		return compra;

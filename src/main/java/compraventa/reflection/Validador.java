@@ -48,7 +48,7 @@ public class Validador {
 	public static void main(String[] args) {
 		Validador v = new Validador();
 		Compra c = new Compra();
-		c.setCantidad(-10);
+		//c.setCantidad(-10);
 		System.out.println("Es una compra válida: " + v.isValid(c));
 		
 		Venta venta = new Venta();

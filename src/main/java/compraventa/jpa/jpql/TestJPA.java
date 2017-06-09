@@ -1,7 +1,11 @@
 package compraventa.jpa.jpql;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
+import compraventa.Compra;
+import compraventa.CompraDetalle;
 import compraventa.Producto;
 
 /**
@@ -25,10 +29,20 @@ public class TestJPA {
 		em.getTransaction().begin();
 
 		em.persist(p);
+		
+		Compra compra = new Compra();
+		CompraDetalle detalle = new CompraDetalle();
+		detalle.setCompra(compra);
+		compra.getDetalles().add(detalle);
+		
+		detalle.setCantidad(10);
+		detalle.setProducto(p);
+		compra.setFecha(new Date());
+		em.persist(compra);
 
 		em.getTransaction().commit();
-		System.out.println("Registro creado!");
-		System.out.println(p);
+		System.out.println("Compra guardada!");
+		System.out.println(compra);
 		em.close();
 	}
 }
