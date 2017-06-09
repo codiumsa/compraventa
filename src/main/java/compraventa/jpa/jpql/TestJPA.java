@@ -1,4 +1,4 @@
-package compraventa.jpa;
+package compraventa.jpa.jpql;
 
 import javax.persistence.EntityManager;
 

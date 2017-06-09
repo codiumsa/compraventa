@@ -6,3 +6,4 @@
 *.class
 ventas.csv
 nuevo.txt
+*_.java

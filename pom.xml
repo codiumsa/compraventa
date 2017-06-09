@@ -12,6 +12,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>5.2.10.Final</hibernate.version>
+		<version.clean.plugin>2.5</version.clean.plugin>
+		<version.compiler.plugin>3.0</version.compiler.plugin>
 	</properties>
 
 	<dependencies>
@@ -41,7 +43,48 @@
 			<artifactId>mchange-commons-java</artifactId>
 			<version>0.2.12</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- JPA metamodel -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${version.clean.plugin}</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/src/main/java/</directory>
+							<includes>
+								<include>**/*_.java</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.compiler.plugin}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<generatedSourcesDirectory>
+						${basedir}/src/main/java/
+					</generatedSourcesDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 
 
 	<repositories>
