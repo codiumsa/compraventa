@@ -1,0 +1,22 @@
+<!-- archivo de muestra que configura el datasource -->
+<datasource jndi-name="java:jboss/datasources/compraventaDS"
+	pool-name="compraventaDS" enabled="true" use-java-context="true">
+	<connection-url>jdbc:oracle:thin:@localhost:49161:xe</connection-url>
+	<driver>oracle</driver>
+	<transaction-isolation>TRANSACTION_READ_COMMITTED
+	</transaction-isolation>
+	<pool>
+		<min-pool-size>10</min-pool-size>
+		<max-pool-size>100</max-pool-size>
+		<prefill>true</prefill>
+		<use-strict-min>false</use-strict-min>
+		<flush-strategy>FailingConnectionOnly</flush-strategy>
+	</pool>
+	<security>
+		<user-name>system</user-name>
+		<password>oracle</password>
+	</security>
+	<statement>
+		<prepared-statement-cache-size>32</prepared-statement-cache-size>
+	</statement>
+</datasource>
