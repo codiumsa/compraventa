@@ -19,4 +19,7 @@
     xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd" bean-discovery-mode="all">
+	<interceptors>
+		<class>compraventa.interceptor.LoggedInterceptor</class>
+	</interceptors>
 </beans>

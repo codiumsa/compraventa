@@ -1,0 +1,91 @@
+package compraventa.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "producto")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 368804720253655075L;
+
+	@Id
+	@SequenceGenerator(name = "producto_id_seq", sequenceName = "producto_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "producto_id_seq")
+	private Long id;
+
+	@Column(name = "nombre")
+	private String nombre;
+
+	@Column(name = "existencia")
+	private Integer existencia = 0;
+
+	@Column(name = "codigo")
+	private String codigo;
+
+	@Column(name = "precio")
+	private Long precio;
+
+	public Producto() {
+	}
+
+	public Producto(String nombre, Integer existencia) {
+		this.nombre = nombre;
+		this.existencia = existencia;
+	}
+
+	public Producto(String codigo, String nombre) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getExistencia() {
+		return existencia;
+	}
+
+	public void setExistencia(Integer existencia) {
+		this.existencia = existencia;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String toString() {
+		return "[ID: " + id + "] " + nombre + " (" + codigo + ") " + existencia + " unidades en stock. Precio: "
+				+ precio;
+	}
+
+	public Long getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Long precio) {
+		this.precio = precio;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+}
