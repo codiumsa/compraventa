@@ -28,6 +28,9 @@ import javax.persistence.Table;
 	@NamedQuery(name="Compra.count", query="SELECT count(c) from Compra c")
 })
 public class Compra implements Serializable {
+	
+	// null reference;
+	public static final Compra NULL = null;
 
 	private static final long serialVersionUID = 6398338866521001688L;
 

@@ -34,7 +34,7 @@ public class JMSClient {
 			MessageProducer producer = session.createProducer(textQueue);
 			
 			connection.start();
-			TextMessage message = session.createTextMessage("Hola mundo!");
+			TextMessage message = session.createTextMessage("COMPRAR");
 			producer.send(message);
 			connection.close();
 		} catch (Exception e) {
