@@ -18,6 +18,7 @@ import compraventa.model.Compra;
  * 
  * @author jorge
  */
+
 @Stateless
 @LocalBean
 public class ComprasDAO implements DAO<Compra, Long> {

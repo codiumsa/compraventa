@@ -1,6 +1,7 @@
 package compraventa.business;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,9 +21,11 @@ public class ComprasBusiness {
 
 	@Inject
 	ComprasDAO dao;
+	
+	private final static Logger LOGGER = Logger.getLogger(ComprasBusiness.class.toString());
 
 	public Compra comprar(List<OrdenCompra> ordenesCompras) throws BusinessException {
-		// TODO
+		LOGGER.info("Invocando CompraBusiness.comprar");
 		return null;
 	}
 }

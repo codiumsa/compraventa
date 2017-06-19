@@ -14,6 +14,7 @@ public class Secretaria {
 	
 	
 	class Impresora {
+		
 		public void imprimir(String hoja) {
 			System.out.println("Secretaria(" + nombre + ")");
 			System.out.println(hoja);
