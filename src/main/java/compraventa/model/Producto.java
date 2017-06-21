@@ -10,12 +10,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import compraventa.validation.CaseMode;
+import compraventa.validation.CheckCase;
 
 @Entity
 @Table(name = "producto")
-@NamedQueries({
-	@NamedQuery(name="Producto.count", query="SELECT count(p) from Producto p")
-})
+@NamedQueries({ @NamedQuery(name = "Producto.count", query = "SELECT count(p) from Producto p") })
 public class Producto implements Serializable {
 	private static final long serialVersionUID = 368804720253655075L;
 
@@ -25,15 +27,20 @@ public class Producto implements Serializable {
 	private Long id;
 
 	@Column(name = "nombre")
+	@NotNull
 	private String nombre;
 
 	@Column(name = "existencia")
+	@NotNull
 	private Integer existencia = 0;
 
 	@Column(name = "codigo")
+	@CheckCase(CaseMode.UPPER)
+	@NotNull
 	private String codigo;
 
 	@Column(name = "precio")
+	@NotNull
 	private Long precio;
 
 	public Producto() {

@@ -1,7 +1,5 @@
 package compraventa.jms;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,10 +10,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import compraventa.business.ComprasBusiness;
-import compraventa.dao.ProductosDAO;
-import compraventa.model.OrdenCompra;
-import compraventa.model.Producto;
+import compraventa.business.DemoComprasBusiness;
 
 /**
  * <p>
@@ -35,10 +30,7 @@ public class TextQueueMDB implements MessageListener {
 	private final static Logger LOGGER = Logger.getLogger(TextQueueMDB.class.toString());
 
 	@Inject
-	ComprasBusiness comprasBusiness;
-
-	@Inject
-	ProductosDAO productosDAO;
+	DemoComprasBusiness demoComprasBusiness;
 
 	/**
 	 * @see MessageListener#onMessage(Message)
@@ -66,36 +58,18 @@ public class TextQueueMDB implements MessageListener {
 	private void processMsg(String command) {
 		switch (command) {
 		case "COMPRAR":
-			registrarCompra();
+			try {
+				demoComprasBusiness.crearCompra();
+			} catch (Exception e) {
+				LOGGER.log(Level.SEVERE, "Error al registrar la compra", e.getCause());
+			}
 			break;
 		case "VENDER":
 			registrarVenta();
+			break;
 		default:
 			LOGGER.warning("Comando inválido");
 			break;
-		}
-	}
-
-	/**
-	 * Simula un proceso de compras.
-	 */
-	void registrarCompra() {
-		Producto producto = new Producto("BAN01", "Banana de oro");
-		producto.setExistencia(10);
-		producto.setPrecio(2000L);
-
-		try {
-			productosDAO.persist(producto);
-			
-			OrdenCompra oc = new OrdenCompra();
-			oc.setProducto(producto);
-			oc.setCantidad(20);
-			List<OrdenCompra> ordenes = new ArrayList<>();
-			ordenes.add(oc);
-			
-			comprasBusiness.comprar(ordenes);
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Error al registrar la compra", e.getCause());
 		}
 	}
 

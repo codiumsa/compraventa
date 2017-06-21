@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * Esta es la entidad que represneta a las compras.
@@ -42,6 +43,7 @@ public class Compra implements Serializable {
 	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
 	private List<CompraDetalle> detalles = new ArrayList<>();
 
+	@NotNull
 	private Date fecha;
 
 	public Date getFecha() {
