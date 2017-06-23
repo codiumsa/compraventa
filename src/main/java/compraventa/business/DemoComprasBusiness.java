@@ -1,6 +1,7 @@
 package compraventa.business;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -74,7 +75,7 @@ public class DemoComprasBusiness implements DemoComprasBusinessRemote {
 
 			OrdenCompra oc = new OrdenCompra();
 			oc.setProducto(producto);
-			oc.setCantidad(-20);
+			oc.setCantidad(20);
 			List<OrdenCompra> ordenes = new ArrayList<>();
 			ordenes.add(oc);
 
@@ -82,5 +83,10 @@ public class DemoComprasBusiness implements DemoComprasBusinessRemote {
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}
+	}
+
+	@Override
+	public void exportar(Date fecha) throws BusinessException {
+		comprasBusiness.exportar(fecha);
 	}
 }

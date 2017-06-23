@@ -25,11 +25,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "compra")
-@NamedQueries({
-	@NamedQuery(name="Compra.count", query="SELECT count(c) from Compra c")
-})
+@NamedQueries({ @NamedQuery(name = "Compra.count", query = "SELECT count(c) from Compra c") })
 public class Compra implements Serializable {
-	
+
 	// null reference;
 	public static final Compra NULL = null;
 
@@ -79,6 +77,15 @@ public class Compra implements Serializable {
 					+ ", Precio: " + detalle.getProducto().getPrecio();
 		}
 		return msg;
+	}
+
+	public Long getTotal() {
+		long total = 0;
+
+		for (CompraDetalle d : detalles) {
+			total += d.getCantidad() * d.getProducto().getPrecio();
+		}
+		return total;
 	}
 
 }

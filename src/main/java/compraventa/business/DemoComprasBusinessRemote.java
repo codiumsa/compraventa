@@ -1,5 +1,7 @@
 package compraventa.business;
 
+import java.util.Date;
+
 import javax.ejb.Remote;
 
 import compraventa.exception.BusinessException;
@@ -14,4 +16,6 @@ import compraventa.exception.BusinessException;
 public interface DemoComprasBusinessRemote {
 
 	void crearCompra() throws BusinessException;
+
+	void exportar(Date fecha) throws BusinessException;
 }

@@ -1,5 +1,8 @@
 package compraventa.business;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +36,13 @@ public class ComprasBusiness {
 
 	private final static Logger LOGGER = Logger.getLogger(ComprasBusiness.class.toString());
 
+	/**
+	 * Implementa la lógica de compras.
+	 * 
+	 * @param ordenesCompras
+	 * @return
+	 * @throws BusinessException
+	 */
 	public Compra comprar(List<OrdenCompra> ordenesCompras) throws BusinessException {
 		LOGGER.info("[BE] Proceso CompraBusiness.comprar iniciando");
 
@@ -74,5 +84,36 @@ public class ComprasBusiness {
 			throw new BusinessException(e);
 		}
 		return compra;
+	}
+
+	/**
+	 * Implementa la lógica de exportación de registros de compra a formato CSV
+	 * a la fecha dada como parámetro.
+	 * 
+	 * @param fecha
+	 * @throws BusinessException
+	 */
+	public void exportar(Date fecha) throws BusinessException {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			FileWriter writer = new FileWriter("/tmp/compras.csv");
+			BufferedWriter br = new BufferedWriter(writer);
+			List<Compra> compras = dao.allBeforeDate(fecha);
+
+			for (Compra c : compras) {
+				br.write(c.getId() + ";" + sdf.format(c.getFecha()) + ";" + c.getTotal());
+				br.newLine();
+
+				for (CompraDetalle d : c.getDetalles()) {
+					br.write(d.getId() + ";" + d.getProducto().getCodigo() + ";" + d.getCantidad() + ";"
+							+ d.getProducto().getPrecio());
+					br.newLine();
+				}
+			}
+			br.close();
+			writer.close();
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package compraventa.business;
 
+import java.util.Date;
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -24,9 +25,9 @@ public class EJBClient {
 			DemoComprasBusinessRemote demoComprasBusiness = (DemoComprasBusinessRemote) ic
 					.lookup("compraventa/DemoComprasBusiness!compraventa.business.DemoComprasBusinessRemote");
 			demoComprasBusiness.crearCompra();
+			demoComprasBusiness.exportar(new Date());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
