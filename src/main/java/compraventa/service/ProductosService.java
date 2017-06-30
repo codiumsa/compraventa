@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import compraventa.dao.ProductosDAO;
 import compraventa.model.Producto;
 
@@ -21,6 +23,7 @@ public class ProductosService {
 
 	private final static Logger LOGGER = Logger.getLogger(DemoService.class.toString());
 
+	@JsonView(View.Base.class)
 	@GET
 	@Produces("application/json")
 	public Response all() {
