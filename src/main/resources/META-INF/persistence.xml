@@ -23,7 +23,7 @@
 			<!-- hbm2ddl.auto especifica al qué se debe hacer cuando se crea el SessionFactory 
 				para comuniación con la base de datos. Posibles valores: create, update, 
 				validate, create-drop -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
 		</properties>
 	</persistence-unit>
 </persistence>

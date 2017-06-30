@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
  * @author jorge
  */
 public class EJBClient {
-
+	
 	public static void main(String[] args) {
 		final Properties jndiProperties = new Properties();
 		jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
