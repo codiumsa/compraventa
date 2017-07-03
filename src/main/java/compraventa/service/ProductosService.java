@@ -16,8 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import compraventa.dao.ProductosDAO;
 import compraventa.model.Producto;
 
@@ -34,7 +32,6 @@ public class ProductosService {
 	 * 
 	 * @return
 	 */
-	@JsonView(View.Base.class)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response all() {
@@ -74,7 +71,6 @@ public class ProductosService {
 	 * @param id
 	 * @return
 	 */
-	@JsonView(View.Base.class)
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)

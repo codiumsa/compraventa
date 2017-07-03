@@ -12,9 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import compraventa.service.View;
 import compraventa.validation.CaseMode;
 import compraventa.validation.CheckCase;
 
