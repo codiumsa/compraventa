@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import compraventa.model.Compra;
 import compraventa.model.Producto;
 
 @Stateless
@@ -45,12 +44,12 @@ public class ProductosDAO implements DAO<Producto, Long> {
 
 	@Override
 	public void remove(Long id) throws Exception {
-		Compra c = em.find(Compra.class, id);
+		Producto p = em.find(Producto.class, id);
 
-		if (c == null) {
+		if (p == null) {
 			throw new RuntimeException("No existe el elemento con ID: " + id);
 		}
-		em.remove(c);
+		em.remove(p);
 	}
 
 	@Override
