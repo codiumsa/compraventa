@@ -31,23 +31,19 @@ public class Producto implements Serializable {
 
 	@Column(name = "nombre")
 	@NotNull
-	@JsonView(View.Base.class)
 	private String nombre;
 
 	@Column(name = "existencia")
 	@NotNull
-	@JsonView(View.Base.class)
 	private Integer existencia = 0;
 
 	@Column(name = "codigo")
 	@CheckCase(CaseMode.UPPER)
 	@NotNull
-	@JsonView(View.Base.class)
 	private String codigo;
 
 	@Column(name = "precio")
 	@NotNull
-	@JsonView(View.Base.class)
 	private Long precio;
 
 	public Producto() {

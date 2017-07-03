@@ -2,6 +2,8 @@ package compraventa.dao;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -12,6 +14,8 @@ import javax.persistence.criteria.Root;
 import compraventa.model.Compra;
 import compraventa.model.Producto;
 
+@Stateless
+@LocalBean
 public class ProductosDAO implements DAO<Producto, Long> {
 
 	@Inject
@@ -42,6 +46,10 @@ public class ProductosDAO implements DAO<Producto, Long> {
 	@Override
 	public void remove(Long id) throws Exception {
 		Compra c = em.find(Compra.class, id);
+
+		if (c == null) {
+			throw new RuntimeException("No existe el elemento con ID: " + id);
+		}
 		em.remove(c);
 	}
 

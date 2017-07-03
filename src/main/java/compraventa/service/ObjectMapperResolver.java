@@ -23,7 +23,7 @@ public class ObjectMapperResolver implements ContextResolver<ObjectMapper> {
     public ObjectMapperResolver() {
         mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+        //mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
     }
 
     @Override
