@@ -27,7 +27,7 @@ public class ProductosService {
 	@Inject
 	ProductosDAO dao;
 
-	private final static Logger LOGGER = Logger.getLogger(DemoService.class.toString());
+	private final static Logger LOGGER = Logger.getLogger(ProductosService.class.toString());
 
 	/**
 	 * Implementa el servicio para obtener un listado de productos.

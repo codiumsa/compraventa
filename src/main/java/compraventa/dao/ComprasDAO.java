@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import compraventa.model.Compra;
+import compraventa.model.CompraDetalle;
 import compraventa.model.Compra_;
 
 /**
@@ -65,7 +66,7 @@ public class ComprasDAO implements DAO<Compra, Long> {
 	public Long count() throws Exception {
 		return em.createNamedQuery("Compra.count", Long.class).getSingleResult();
 	}
-	
+
 	public List<Compra> allBeforeDate(Date date) throws Exception {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Compra> cq = cb.createQuery(Compra.class);
@@ -74,6 +75,17 @@ public class ComprasDAO implements DAO<Compra, Long> {
 		cq.where(cb.lessThanOrEqualTo(compra.get(Compra_.fecha), date));
 		TypedQuery<Compra> q = em.createQuery(cq);
 		return q.getResultList();
+	}
+
+	public List<CompraDetalle> getDetalles(Long compraId) throws Exception {
+		Compra c = em.find(Compra.class, compraId);
+		List<CompraDetalle> detalles = c.getDetalles();
+
+		for (CompraDetalle cd : detalles) {
+			em.detach(cd);
+		}
+		em.detach(c);
+		return detalles;
 	}
 
 }

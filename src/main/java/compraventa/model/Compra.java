@@ -17,6 +17,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import compraventa.service.View;
+
 /**
  * Esta es la entidad que represneta a las compras.
  * 
@@ -36,12 +40,15 @@ public class Compra implements Serializable {
 	@Id
 	@SequenceGenerator(name = "compra_id_seq", sequenceName = "compra_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "compra_id_seq")
+	@JsonView(View.Public.class)
 	private Long id;
 
 	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
+	@JsonView(View.ConDetalle.class)
 	private List<CompraDetalle> detalles = new ArrayList<>();
 
 	@NotNull
+	@JsonView(View.Public.class)
 	private Date fecha;
 
 	public Date getFecha() {

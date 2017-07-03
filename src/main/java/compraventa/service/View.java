@@ -11,4 +11,8 @@ public interface View {
 
 	interface Public {
 	}
+	
+	interface ConDetalle {
+		
+	}
 }
