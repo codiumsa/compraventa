@@ -12,6 +12,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import compraventa.service.View;
 import compraventa.validation.CaseMode;
 import compraventa.validation.CheckCase;
 
@@ -24,23 +27,28 @@ public class Producto implements Serializable {
 	@Id
 	@SequenceGenerator(name = "producto_id_seq", sequenceName = "producto_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "producto_id_seq")
+	@JsonView(View.Public.class)
 	private Long id;
 
 	@Column(name = "nombre")
 	@NotNull
+	@JsonView(View.Public.class)
 	private String nombre;
 
 	@Column(name = "existencia")
 	@NotNull
+	@JsonView(View.Public.class)
 	private Integer existencia = 0;
 
 	@Column(name = "codigo")
 	@CheckCase(CaseMode.UPPER)
 	@NotNull
+	@JsonView(View.Public.class)
 	private String codigo;
 
 	@Column(name = "precio")
 	@NotNull
+	@JsonView(View.Public.class)
 	private Long precio;
 
 	public Producto() {

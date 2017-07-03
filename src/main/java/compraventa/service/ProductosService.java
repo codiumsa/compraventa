@@ -16,6 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import compraventa.dao.ProductosDAO;
 import compraventa.model.Producto;
 
@@ -34,6 +36,7 @@ public class ProductosService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.Public.class)
 	public Response all() {
 
 		try {
@@ -54,7 +57,8 @@ public class ProductosService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Producto producto) {
+	@JsonView(View.Public.class)
+	public Response create(@JsonView(View.Public.class) Producto producto) {
 
 		try {
 			dao.persist(producto);
@@ -74,6 +78,7 @@ public class ProductosService {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@JsonView(View.Public.class)
 	public Response getOne(@PathParam("id") Long id) {
 
 		try {
@@ -95,7 +100,8 @@ public class ProductosService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Producto producto) {
+	@JsonView(View.Public.class)
+	public Response update(@JsonView(View.Public.class) Producto producto) {
 
 		try {
 			Producto updated = dao.update(producto);
@@ -116,6 +122,7 @@ public class ProductosService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@JsonView(View.Public.class)
 	public Response delete(@PathParam("id") Long id) {
 
 		try {
