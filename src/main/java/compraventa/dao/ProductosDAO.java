@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import compraventa.model.Producto;
+import compraventa.model.Producto_;
 
 @Stateless
 @LocalBean
@@ -20,12 +21,31 @@ public class ProductosDAO implements DAO<Producto, Long> {
 	@Inject
 	EntityManager em;
 
+	/**
+	 * Listado de todos los elementos.
+	 */
 	@Override
 	public List<Producto> all() throws Exception {
+		return all(null);
+	}
+
+	/**
+	 * Listado de elementos con posibilidad de filtrar por código.
+	 * 
+	 * @param codigo
+	 * @param nombre
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Producto> all(String codigo) throws Exception {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Producto> cq = cb.createQuery(Producto.class);
 		Root<Producto> producto = cq.from(Producto.class);
 		cq.select(producto);
+
+		if (codigo != null) {
+			cq.where(cb.equal(producto.get(Producto_.codigo), codigo));
+		}
 		TypedQuery<Producto> q = em.createQuery(cq);
 		return q.getResultList();
 	}
