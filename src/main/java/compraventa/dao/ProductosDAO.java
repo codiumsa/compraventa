@@ -57,6 +57,10 @@ public class ProductosDAO implements DAO<Producto, Long> {
 
 	@Override
 	public Producto update(Producto instance) throws Exception {
+		
+		if (instance.getId() == null) {
+			throw new RuntimeException("El producto a actualizar debe tener un ID");
+		}
 		Producto updated = em.merge(instance);
 		em.flush();
 		return updated;

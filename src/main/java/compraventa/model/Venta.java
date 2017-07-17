@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Venta {
 	private Producto producto;
+	
 	private Date fecha;
 	
 	private Integer cantidad;
