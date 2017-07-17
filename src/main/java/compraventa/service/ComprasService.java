@@ -5,7 +5,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,15 +16,17 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import compraventa.dao.ComprasDAO;
+import compraventa.business.ComprasBusiness;
+import compraventa.exception.BusinessException;
 import compraventa.model.Compra;
 import compraventa.model.CompraDetalle;
+import compraventa.model.OrdenCompra;
 
 @Path("compras")
 public class ComprasService {
 
 	@Inject
-	ComprasDAO dao;
+	ComprasBusiness business;
 
 	private final static Logger LOGGER = Logger.getLogger(ComprasService.class.toString());
 
@@ -37,9 +41,9 @@ public class ComprasService {
 	public Response all() {
 
 		try {
-			List<Compra> compras = dao.all();
+			List<Compra> compras = business.all();
 			return Response.ok().entity(compras).build();
-		} catch (Exception e) {
+		} catch (BusinessException e) {
 			LOGGER.log(Level.SEVERE, e.getMessage());
 			return Response.serverError().build();
 		}
@@ -57,10 +61,31 @@ public class ComprasService {
 	public Response detalles(@PathParam("id") Long id) {
 
 		try {
-			List<CompraDetalle> detalles = dao.getDetalles(id);
+			List<CompraDetalle> detalles = business.getDetalles(id);
 			return Response.ok().entity(detalles).build();
-		} catch (Exception e) {
+		} catch (BusinessException e) {
 			LOGGER.log(Level.SEVERE, e.getMessage());
+			return Response.serverError().build();
+		}
+	}
+
+	/**
+	 * Implementa el servicio para registrar una compra.
+	 * 
+	 * @param ordenes
+	 * @return
+	 */
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@JsonView(View.Public.class)
+	public Response comprar(@JsonView(View.Public.class) List<OrdenCompra> ordenes) {
+		try {
+			Compra compra = business.comprar(ordenes);
+			return Response.ok().entity(compra).build();
+		} catch (BusinessException e) {
+			LOGGER.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			return Response.serverError().build();
 		}
 	}

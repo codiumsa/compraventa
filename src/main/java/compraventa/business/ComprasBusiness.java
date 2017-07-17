@@ -69,14 +69,16 @@ public class ComprasBusiness {
 				// creamos el detalle de la compra
 				CompraDetalle detalle = new CompraDetalle();
 				detalle.setCompra(compra);
-				detalle.setProducto(orden.getProducto());
+				Producto producto = productosDAO.find(orden.getProducto().getId());
+				detalle.setProducto(producto);
 				detalle.setCantidad(orden.getCantidad());
 				detalles.add(detalle);
 
-				// incrementamos la existencia del producto
-				Producto p = orden.getProducto();
-				p.setExistencia(p.getExistencia() + orden.getCantidad());
-				productosDAO.update(p);
+				// incrementamos la existencia del productos. No hace falta
+				// utilizar el método update del dao de productos, porque la
+				// instancia producto se encuentra en el contexto de
+				// persistencia.
+				producto.setExistencia(producto.getExistencia() + orden.getCantidad());
 			}
 			dao.persist(compra);
 			LOGGER.info("[BE] Proceso CompraBusiness.comprar finalizado");
@@ -112,6 +114,35 @@ public class ComprasBusiness {
 			}
 			br.close();
 			writer.close();
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	/**
+	 * Retorna todas las compras registradas en el sistema.
+	 * 
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<Compra> all() throws BusinessException {
+		try {
+			return dao.all();
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	/**
+	 * Retorna los detalles de la compra dada como parámetro.
+	 * 
+	 * @param compraId
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<CompraDetalle> getDetalles(Long compraId) throws BusinessException {
+		try {
+			return dao.getDetalles(compraId);
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}

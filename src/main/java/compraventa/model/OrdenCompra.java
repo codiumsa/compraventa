@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import compraventa.service.View;
+
 @Entity
 @Table(name = "orden_compra")
 public class OrdenCompra implements Serializable {
@@ -19,12 +23,15 @@ public class OrdenCompra implements Serializable {
 	@Id
 	@SequenceGenerator(name = "orden_compra_id_seq", sequenceName = "orden_compra_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "orden_compra_id_seq")
+	@JsonView(View.Public.class)
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "producto_id")
+	@JsonView(View.Public.class)
 	private Producto producto;
 
+	@JsonView(View.Public.class)
 	private Integer cantidad;
 
 	public Long getId() {
