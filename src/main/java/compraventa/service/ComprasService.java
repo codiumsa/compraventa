@@ -1,5 +1,6 @@
 package compraventa.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,13 +40,26 @@ public class ComprasService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@JsonView(View.Public.class)
-	public Response all() {
+	public Response all(@QueryParam("desde") final String desde, @QueryParam("hasta") final String hasta) {
 
 		try {
-			List<Compra> compras = business.all();
+			List<Compra> compras;
+
+			if (desde != null) {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+				if (hasta != null) {
+					compras = business.allInDateRange(sdf.parse(desde), sdf.parse(hasta));
+				} else {
+					compras = business.allInDateRange(sdf.parse(desde), null);
+				}
+
+			} else {
+				compras = business.all();
+			}
 			return Response.ok().entity(compras).build();
-		} catch (BusinessException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage() + "\n" + e.getCause().getMessage());
 			return Response.serverError().build();
 		}
 	}
@@ -64,7 +79,7 @@ public class ComprasService {
 			List<CompraDetalle> detalles = business.getDetalles(id);
 			return Response.ok().entity(detalles).build();
 		} catch (BusinessException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.log(Level.SEVERE, e.getMessage() + "\n" + e.getCause().getMessage());
 			return Response.serverError().build();
 		}
 	}
@@ -84,8 +99,7 @@ public class ComprasService {
 			Compra compra = business.comprar(ordenes);
 			return Response.ok().entity(compra).build();
 		} catch (BusinessException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.getMessage() + "\n" + e.getCause().getMessage());
 			return Response.serverError().build();
 		}
 	}

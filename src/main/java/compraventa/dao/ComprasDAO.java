@@ -1,5 +1,6 @@
 package compraventa.dao;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,6 +74,31 @@ public class ComprasDAO implements DAO<Compra, Long> {
 		Root<Compra> compra = cq.from(Compra.class);
 		cq.select(compra);
 		cq.where(cb.lessThanOrEqualTo(compra.get(Compra_.fecha), date));
+		TypedQuery<Compra> q = em.createQuery(cq);
+		return q.getResultList();
+	}
+
+	/**
+	 * Retorna las compras registradas en el rango de fechas dado como
+	 * parámetro.
+	 * 
+	 * @param desde
+	 * @param hasta
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Compra> allInDateRange(Date desde, Date hasta) throws Exception {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Compra> cq = cb.createQuery(Compra.class);
+		Root<Compra> compra = cq.from(Compra.class);
+		cq.select(compra);
+		// sumamos un día a hasta para que pueda ser inclusivo el rango de
+		// fechas.
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(hasta);
+		calendar.add(Calendar.DATE, 1);
+		cq.where(cb.and(cb.greaterThanOrEqualTo(compra.get(Compra_.fecha), desde),
+				cb.lessThanOrEqualTo(compra.get(Compra_.fecha), calendar.getTime())));
 		TypedQuery<Compra> q = em.createQuery(cq);
 		return q.getResultList();
 	}

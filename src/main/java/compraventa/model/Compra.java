@@ -15,10 +15,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import compraventa.serialization.DateFormat;
+import compraventa.serialization.JSonDateDeserializer;
+import compraventa.serialization.JsonDateSerializer;
 import compraventa.service.View;
 
 /**
@@ -49,7 +55,14 @@ public class Compra implements Serializable {
 
 	@NotNull
 	@JsonView(View.Public.class)
+	@DateFormat("dd/MM/yyyy")
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonDeserialize(using = JSonDateDeserializer.class)
 	private Date fecha;
+
+	@JsonView(View.Public.class)
+	@Transient
+	private Long total;
 
 	public Date getFecha() {
 		return fecha;
@@ -87,12 +100,10 @@ public class Compra implements Serializable {
 	}
 
 	public Long getTotal() {
-		long total = 0;
-
-		for (CompraDetalle d : detalles) {
-			total += d.getCantidad() * d.getProducto().getPrecio();
-		}
 		return total;
 	}
 
+	public void setTotal(Long total) {
+		this.total = total;
+	}
 }

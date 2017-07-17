@@ -103,7 +103,7 @@ public class ComprasBusiness {
 			List<Compra> compras = dao.allBeforeDate(fecha);
 
 			for (Compra c : compras) {
-				br.write(c.getId() + ";" + sdf.format(c.getFecha()) + ";" + c.getTotal());
+				br.write(c.getId() + ";" + sdf.format(c.getFecha()) + ";" + getTotal(c));
 				br.newLine();
 
 				for (CompraDetalle d : c.getDetalles()) {
@@ -127,7 +127,40 @@ public class ComprasBusiness {
 	 */
 	public List<Compra> all() throws BusinessException {
 		try {
-			return dao.all();
+			List<Compra> compras = dao.all();
+
+			for (Compra c : compras) {
+				c.setTotal(getTotal(c));
+			}
+			return compras;
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	/**
+	 * Retorna todas las compras registradas en el sistema para el rango dado
+	 * como parámetro.
+	 * 
+	 * @param desde
+	 *            Fecha de inicio
+	 * @param hasta
+	 *            Fecha fin. Si se pasa un valor nulo, se asume la fecha actual.
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<Compra> allInDateRange(Date desde, Date hasta) throws BusinessException {
+		if (hasta == null) {
+			hasta = new Date();
+		}
+
+		try {
+			List<Compra> compras = dao.allInDateRange(desde, hasta);
+
+			for (Compra c : compras) {
+				c.setTotal(getTotal(c));
+			}
+			return compras;
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}
@@ -143,6 +176,39 @@ public class ComprasBusiness {
 	public List<CompraDetalle> getDetalles(Long compraId) throws BusinessException {
 		try {
 			return dao.getDetalles(compraId);
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	/**
+	 * Calcula el total de la compra.
+	 * 
+	 * @param compra
+	 *            Compra que se encuentra en el contexto de persistencia
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Long getTotal(Compra compra) throws BusinessException {
+		long total = 0;
+
+		for (CompraDetalle d : compra.getDetalles()) {
+			total += d.getCantidad() * d.getProducto().getPrecio();
+		}
+		return total;
+	}
+
+	/**
+	 * Calcula el total de la compra.
+	 * 
+	 * @param compraId
+	 *            Identificador de la compra
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Long getTotal(Long compraId) throws BusinessException {
+		try {
+			return getTotal(dao.find(compraId));
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}
