@@ -81,6 +81,7 @@ public class ComprasBusiness {
 				producto.setExistencia(producto.getExistencia() + orden.getCantidad());
 			}
 			dao.persist(compra);
+			compra.setTotal(getTotal(compra));
 			LOGGER.info("[BE] Proceso CompraBusiness.comprar finalizado");
 		} catch (Exception e) {
 			throw new BusinessException(e);
