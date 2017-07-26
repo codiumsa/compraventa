@@ -1,0 +1,25 @@
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+	<datasource jndi-name="java:jboss/datasources/compraventaTestDS"
+		pool-name="compraventaTestDS" enabled="true" use-java-context="true">
+		<connection-url>jdbc:oracle:thin:@localhost:49161:xe</connection-url>
+		<driver>oracle</driver>
+		<transaction-isolation>TRANSACTION_READ_COMMITTED
+		</transaction-isolation>
+		<pool>
+			<min-pool-size>10</min-pool-size>
+			<max-pool-size>100</max-pool-size>
+			<prefill>true</prefill>
+			<use-strict-min>false</use-strict-min>
+			<flush-strategy>FailingConnectionOnly</flush-strategy>
+		</pool>
+		<security>
+			<user-name>system</user-name>
+			<password>oracle</password>
+		</security>
+		<statement>
+			<prepared-statement-cache-size>32</prepared-statement-cache-size>
+		</statement>
+	</datasource>
+</datasources>

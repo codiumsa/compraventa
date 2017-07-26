@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="compraventa">
+		<jta-data-source>java:jboss/datasources/compraventaTestDS</jta-data-source>
+
+		<properties>
+			<!-- La propiedad show_sql especifica si hibernate debe imprimir las consultas 
+				SQL generadas en el archivo de log. Para ambiente de desarrollo esto es muy 
+				útil, para producción puede deshabilitarse. -->
+			<property name="hibernate.show_sql" value="true" />
+
+			<!-- format_sql indica si las consultas deben tener un formato legible 
+				o no -->
+			<property name="hibernate.format_sql" value="true" />
+
+			<!-- dialect indica el dialecto que queremos utilizar -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+
+			<!-- hbm2ddl.auto especifica al qué se debe hacer cuando se crea el SessionFactory 
+				para comuniación con la base de datos. Posibles valores: create, update, 
+				validate, create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+		</properties>
+	</persistence-unit>
+</persistence>

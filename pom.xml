@@ -17,6 +17,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<version.jboss.bom>10.0.0.Final</version.jboss.bom>
 		<version.wildfly>10.0.0.Final</version.wildfly>
+		<version.log4j2>2.2</version.log4j2>
 	</properties>
 
 	<dependencyManagement>
@@ -153,6 +154,41 @@
 			<artifactId>resteasy-jackson2-provider</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- dependencia para Testing la versión manejada por wildfly es 4.12 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- Arquillian permite escribir pruebas para código Java EE -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- permite resolver dependencias maven en los test -->
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-api-maven</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- permite resolver dependencias maven en los test -->
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -191,6 +227,33 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<!-- An optional Arquillian testing profile that executes tests in a remote 
+				WildFly instance -->
+			<!-- Run with: mvn clean test -Parq-wildfly-remote -->
+			<id>wildfly-remote</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<scope>test</scope>
+					<version>8.2.1.Final</version>
+				</dependency>
+
+				<dependency>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-api</artifactId>
+					<version>${version.log4j2}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-core</artifactId>
+					<version>${version.log4j2}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 
 	<repositories>
