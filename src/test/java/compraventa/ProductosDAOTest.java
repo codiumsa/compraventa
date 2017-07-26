@@ -21,6 +21,14 @@ import compraventa.model.Producto;
 /**
  * Define los test unitarios para {@link ProductosDAO}.
  * 
+ * 
+ * 
+ * 
+ * // correr pruebas y empaquetar
+ *  mvn clean package -Pwildfly-remote
+ * // empaquetar y no correr pruebas
+ * mvn clean package -DskipTests
+ * 
  * @author jorge
  */
 @RunWith(Arquillian.class)
@@ -55,15 +63,14 @@ public class ProductosDAOTest {
 		producto.setExistencia(100);
 		producto.setPrecio(2000L);
 		dao.persist(producto);
-		Assert.assertNotNull(producto.getId());
+		Assert.assertNotNull("El producto creado debe tener un ID", producto.getId());
 	}
 
 	@Test
 	@InSequence(2)
 	public void testAll() throws Exception {
 		List<Producto> productos = dao.all();
-		Assert.assertNotNull(productos);
-		Assert.assertFalse("Existen productos en la base de datos", productos.isEmpty());
+		Assert.assertFalse("Deben existir productos en la base de datos", productos.isEmpty());
 	}
 
 }
