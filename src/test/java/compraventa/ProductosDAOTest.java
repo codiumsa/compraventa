@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -41,14 +42,28 @@ public class ProductosDAOTest {
 				// agregamos recursos necesarios
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
 				.addAsWebInfResource("arquillian-ds.xml").addAsWebInfResource("META-INF/beans.xml")
-				.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml", "wildfly-managed")
+				.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml", "wildfly-remote")
 						.importCompileAndRuntimeDependencies().resolve().withTransitivity().asFile());
 	}
 
 	@Test
+	@InSequence(1)
+	public void createTest() throws Exception {
+		Producto producto = new Producto();
+		producto.setCodigo("BAN01");
+		producto.setNombre("Banana de oro");
+		producto.setExistencia(100);
+		producto.setPrecio(2000L);
+		dao.persist(producto);
+		Assert.assertNotNull(producto.getId());
+	}
+
+	@Test
+	@InSequence(2)
 	public void testAll() throws Exception {
 		List<Producto> productos = dao.all();
 		Assert.assertNotNull(productos);
+		Assert.assertFalse("Existen productos en la base de datos", productos.isEmpty());
 	}
 
 }
